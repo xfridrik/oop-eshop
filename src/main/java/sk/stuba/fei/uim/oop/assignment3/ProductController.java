@@ -33,6 +33,26 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<ProductResponse> delProduct(@PathVariable int id){
+        try{
+            this.service.delProduct(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable int id,@RequestBody ProductRequest updateProd){
+        try{
+            Product product=this.service.updateProduct(id,updateProd);
+            return new ResponseEntity<>(new ProductResponse(product),HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 //    @GetMapping("/product")
 //    public ResponseEntity<ProductResponse> getProduct(@RequestParam(name = "id") int id){
 //        return new ResponseEntity<>(new ProductResponse(this.service.getProduct(id)),HttpStatus.OK);
