@@ -1,19 +1,15 @@
 package sk.stuba.fei.uim.oop.assignment3;
 
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.Entity;
 
 @Getter
 public class ProductResponse {
-    private int id;
-    private String name;
-    private String description;
-    private int amount;
-    private String unit;
-    private double price;
+    private final int id;
+    private final String name;
+    private final String description;
+    private final int amount;
+    private final String unit;
+    private final double price;
     public ProductResponse(Product product){
         this.id=product.getId();
         this.name=product.getName();
