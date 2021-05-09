@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3;
+package sk.stuba.fei.uim.oop.assignment3.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +43,19 @@ public class ProductService implements ProductServiceInt{
     public void delProduct(int id) {
         Product delProduct=getProduct(id);
         this.rep.delete(delProduct);
+    }
+
+    @Override
+    public AmountResponse getAmount(int id) {
+        Product amProduct=getProduct(id);
+        return new AmountResponse(amProduct.getAmount());
+    }
+
+    @Override
+    public AmountResponse addAmount(int id,ProductRequest amountReq) {
+        Product amProduct=getProduct(id);
+        amProduct.setAmount(amProduct.getAmount()+ amountReq.getAmount());
+        return new AmountResponse(amProduct.getAmount());
     }
 
 

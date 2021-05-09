@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3;
+package sk.stuba.fei.uim.oop.assignment3.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +48,26 @@ public class ProductController {
         try{
             Product product=this.service.updateProduct(id,updateProd);
             return new ResponseEntity<>(new ProductResponse(product),HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value = "/product/{id}/amount", method = RequestMethod.GET)
+    public ResponseEntity<AmountResponse> getAmount(@PathVariable int id){
+        try{
+            AmountResponse productAmount=this.service.getAmount(id);
+            return new ResponseEntity<>(productAmount,HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value = "/product/{id}/amount", method = RequestMethod.POST)
+    public ResponseEntity<AmountResponse> getAmount(@PathVariable int id,@RequestBody ProductRequest amountProd){
+        try{
+            AmountResponse productAmount=this.service.addAmount(id,amountProd);
+            return new ResponseEntity<>(productAmount,HttpStatus.OK);
         }
         catch (NoSuchElementException ex){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
