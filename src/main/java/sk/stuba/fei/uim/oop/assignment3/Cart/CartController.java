@@ -23,4 +23,25 @@ public class CartController {
         createdCart.setId(this.service.createCart().getId());
         return new ResponseEntity<>(createdCart,HttpStatus.CREATED);
     }
+    @RequestMapping(value = "/cart/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CartResponse> getCart(@PathVariable int id){
+        try{
+            CartResponse cartR=this.service.getCart(id);
+            return new ResponseEntity<>(cartR,HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value = "/cart/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<CartResponse> delCart(@PathVariable int id){
+        try{
+            this.service.deleteCart(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (NoSuchElementException ex){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
