@@ -17,14 +17,14 @@ public class Product {
     private int id;
     private String name;
     private String description;
-    private int amount;
+    private long amount;
     private String unit;
     private double price;
     @ManyToMany
     private List<ProductInCart> products=new ArrayList<>();
 
 
-    void setAll(String name,String description,int amount,String unit,double price){
+    void setAll(String name,String description,long amount,String unit,double price){
         this.name=name;
         this.description=description;
         this.amount=amount;

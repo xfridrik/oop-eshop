@@ -7,7 +7,7 @@ public class ProductResponse {
     private final int id;
     private final String name;
     private final String description;
-    private final int amount;
+    private final long amount;
     private final String unit;
     private final double price;
     public ProductResponse(Product product){

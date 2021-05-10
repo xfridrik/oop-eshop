@@ -6,11 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.AlreadyPayedException;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.AmountLimitException;
-import sk.stuba.fei.uim.oop.assignment3.Product.*;
-
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @RestController
 public class CartController {
@@ -59,11 +55,10 @@ public class CartController {
         }
     }
     @RequestMapping(value = "/cart/{id}/pay", method = RequestMethod.GET)
-    public ResponseEntity<Double> payCart(@PathVariable int id){
+    public ResponseEntity<String> payCart(@PathVariable int id){
         try{
-            double price=0;
-            price=this.service.payCart(id);
-            return new ResponseEntity<>(price,HttpStatus.OK);
+            Double price=this.service.payCart(id);
+            return new ResponseEntity<>(price.toString(),HttpStatus.OK);
         }
         catch (NoSuchElementException ex){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

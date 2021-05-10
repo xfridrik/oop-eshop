@@ -8,7 +8,7 @@ import lombok.Setter;
 public class ProductRequest {
     private String name;
     private String description;
-    private int amount;
+    private long amount;
     private String unit;
     private double price;
 }

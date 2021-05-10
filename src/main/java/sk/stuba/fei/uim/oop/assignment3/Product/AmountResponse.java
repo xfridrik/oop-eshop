@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class AmountResponse {
-    private final int amount;
+    private final long amount;
 
-    public AmountResponse(int amount) {
+    public AmountResponse(long amount) {
         this.amount = amount;
     }
 }
