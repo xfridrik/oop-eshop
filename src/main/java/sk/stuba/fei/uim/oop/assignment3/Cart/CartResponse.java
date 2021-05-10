@@ -2,15 +2,16 @@ package sk.stuba.fei.uim.oop.assignment3.Cart;
 
 import lombok.Getter;
 import lombok.Setter;
-import sk.stuba.fei.uim.oop.assignment3.Product.Product;
+import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductInCartResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 public class CartResponse {
     private int id;
-    private ArrayList<Product> shoppingList=new ArrayList<>();
+    private List<ProductInCartResponse> shoppingList=new ArrayList<>();
     private boolean payed;
 
     public CartResponse() {
@@ -18,8 +19,5 @@ public class CartResponse {
     public CartResponse(Cart cart) {
         this.id=cart.getId();
         this.payed=cart.isPayed();
-    }
-    private void findProducts(){
-
     }
 }
