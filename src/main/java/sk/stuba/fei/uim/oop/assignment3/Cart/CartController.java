@@ -61,7 +61,8 @@ public class CartController {
     @RequestMapping(value = "/cart/{id}/pay", method = RequestMethod.GET)
     public ResponseEntity<Double> payCart(@PathVariable int id){
         try{
-            double price=this.service.payCart(id);
+            double price=0;
+            price=this.service.payCart(id);
             return new ResponseEntity<>(price,HttpStatus.OK);
         }
         catch (NoSuchElementException ex){

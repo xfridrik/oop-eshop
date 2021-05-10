@@ -2,11 +2,11 @@ package sk.stuba.fei.uim.oop.assignment3.Product;
 
 import lombok.Getter;
 import lombok.Setter;
+import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductInCart;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +20,9 @@ public class Product {
     private int amount;
     private String unit;
     private double price;
+    @ManyToMany
+    private List<ProductInCart> products=new ArrayList<>();
+
 
     void setAll(String name,String description,int amount,String unit,double price){
         this.name=name;

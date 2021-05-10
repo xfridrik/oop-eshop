@@ -12,5 +12,5 @@ public interface CartServiceInt {
     void deleteCart(int id);
     CartResponse addToCart(int id,int productId,int amount) throws AmountLimitException, AlreadyPayedException;
     double payCart(int id) throws AlreadyPayedException;
-    //addProductToCart()
+    //Cart addProductToCart(int id,int)
 }

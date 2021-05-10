@@ -58,5 +58,8 @@ public class ProductService implements ProductServiceInt{
         return new AmountResponse(amProduct.getAmount());
     }
 
+    public void save(Product product){
+        this.rep.save(product);
+    }
 
 }

@@ -15,12 +15,17 @@ import java.util.NoSuchElementException;
 
 @Service
 public class CartService implements CartServiceInt {
+    //@Autowired
+    private CartRepo rep;
     @Autowired
-    CartRepo rep;
+    private ProductCartRepo InCartRepo;
     @Autowired
-    ProductCartRepo InCartRepo;
+    private ProductService productService;
+
     @Autowired
-    ProductRepo productRepo;
+    public CartService(CartRepo rep){
+        this.rep=rep;
+    }
 
     @Override
     public Cart createCart() {
@@ -30,34 +35,19 @@ public class CartService implements CartServiceInt {
     @Override
     public CartResponse getCart(int id) {
         Cart cart = rep.findById(id).orElseThrow(NoSuchElementException::new);
-        CartResponse response = new CartResponse(cart);
-        List<ProductInCartResponse> products =new ArrayList<>();
-        List<ProductInCart> allProducts = new ArrayList<>(InCartRepo.findAll());
-        for(ProductInCart product:allProducts){
-            if(product.getCartId()==id){
-                products.add(new ProductInCartResponse(product));
-                //products.add(productRepo.findById(product.getProductId()).orElseThrow(NoSuchElementException::new));
-            }
-        }
-        response.setShoppingList(products);
-        return response;
+        return new CartResponse(cart);
     }
 
     @Override
     public void deleteCart(int id) {
-        List<ProductInCart> allProducts = new ArrayList<>(InCartRepo.findAll());
-        for(ProductInCart product:allProducts){
-            if(product.getCartId()==id){
-                InCartRepo.delete(product);
-            }
-        }
         rep.delete(rep.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     @Override
     public CartResponse addToCart(int id, int productId, int amount) throws AmountLimitException, AlreadyPayedException {
         Cart cart = rep.findById(id).orElseThrow(NoSuchElementException::new);
-        Product product = productRepo.findById(productId).orElseThrow(NoSuchElementException::new);
+        Product product = productService.getProduct(productId);
+
         if(product.getAmount()<amount){
             throw(new AmountLimitException());
         }
@@ -65,26 +55,35 @@ public class CartService implements CartServiceInt {
             throw (new AlreadyPayedException());
         }
         product.setAmount(product.getAmount()-amount);
-        InCartRepo.save(new ProductInCart(id,productId,amount));
+
+        ProductInCart prodInC=(new ProductInCart(product,cart,amount));
+
+        prodInC=this.InCartRepo.save(prodInC);
+
+        cart.getProducts().add(prodInC);
+        product.getProducts().add(prodInC);
+
+        this.productService.save(product);
+        this.rep.save(cart);
+
         return getCart(id);
     }
 
     @Override
     public double payCart(int id) throws AlreadyPayedException {
         Cart cart = rep.findById(id).orElseThrow(NoSuchElementException::new);
+        //System.out.println(cart.isPayed());
         if(cart.isPayed()){
             throw (new AlreadyPayedException());
         }
-        else{
-            cart.setPayed(true);
-        }
+        //System.out.println(cart.isPayed());
+        cart.setPayed(true);
+        //System.out.println(cart.isPayed());
+        this.rep.save(cart);
+
         double price=0;
-        List<ProductInCart> allProducts = new ArrayList<>(InCartRepo.findAll());
-        for(ProductInCart product:allProducts){
-            if(product.getCartId()==id){
-                Product prod=productRepo.findById(product.getProductId()).orElseThrow(NoSuchElementException::new);
-                price=price+product.getAmount()*prod.getPrice();
-            }
+        for (ProductInCart product : cart.getProducts()){
+            price=price+product.getAmount()*product.getProduct().getPrice();
         }
         return price;
     }

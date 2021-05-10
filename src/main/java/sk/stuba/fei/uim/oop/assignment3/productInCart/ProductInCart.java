@@ -14,17 +14,16 @@ public class ProductInCart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int cartId;
-    private int productId;
-//    @OneToMany
-//    private Cart cart;
-//    @OneToMany
-//    private Product product;
+    @ManyToOne
+    private Cart cart;
+    @ManyToOne
+    private Product product;
+
     private int amount;
 
-    public ProductInCart(int cartId, int productId, int amount) {
-        this.cartId=cartId;
-        this.productId=productId;
+    public ProductInCart(Product product, Cart cart, int amount) {
+        this.cart=cart;
+        this.product=product;
         this.amount=amount;
     }
 
