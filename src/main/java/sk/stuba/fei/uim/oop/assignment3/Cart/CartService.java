@@ -4,24 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.AlreadyPayedException;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.AmountLimitException;
+import sk.stuba.fei.uim.oop.assignment3.Exceptions.NotFoundException;
 import sk.stuba.fei.uim.oop.assignment3.Product.*;
 import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductCartRepo;
 import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductInCart;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class CartService implements CartServiceInt {
 
-    private CartRepo cartRepo;
+    private CartRepository cartRepo;
     @Autowired
     private ProductCartRepo InCartRepo;
     @Autowired
     private ProductService productService;
 
     @Autowired
-    public CartService(CartRepo rep){
+    public CartService(CartRepository rep){
         this.cartRepo =rep;
     }
 
@@ -32,18 +32,18 @@ public class CartService implements CartServiceInt {
 
     @Override
     public CartResponse getCart(int id) {
-        Cart cart = cartRepo.findById(id).orElseThrow(NoSuchElementException::new);
+        Cart cart = cartRepo.findById(id).orElseThrow(NotFoundException::new);
         return new CartResponse(cart);
     }
 
     @Override
     public void deleteCart(int id) {
-        cartRepo.delete(cartRepo.findById(id).orElseThrow(NoSuchElementException::new));
+        cartRepo.delete(cartRepo.findById(id).orElseThrow(NotFoundException::new));
     }
 
     @Override
     public CartResponse addToCart(int id, int productId, int amount) throws AmountLimitException, AlreadyPayedException {
-        Cart cart = cartRepo.findById(id).orElseThrow(NoSuchElementException::new);
+        Cart cart = cartRepo.findById(id).orElseThrow(NotFoundException::new);
         Product product = productService.getProduct(productId);
 
         if(product.getAmount()<amount){
@@ -80,7 +80,7 @@ public class CartService implements CartServiceInt {
 
     @Override
     public double payCart(int id) throws AlreadyPayedException {
-        Cart cart = cartRepo.findById(id).orElseThrow(NoSuchElementException::new);
+        Cart cart = cartRepo.findById(id).orElseThrow(NotFoundException::new);
         if(cart.isPayed()){
             throw (new AlreadyPayedException());
         }

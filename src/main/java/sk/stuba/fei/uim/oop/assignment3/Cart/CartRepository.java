@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartRepo extends CrudRepository<Cart, Integer> {
+public interface CartRepository extends CrudRepository<Cart, Integer> {
     //List<Cart> findAll();
 }
