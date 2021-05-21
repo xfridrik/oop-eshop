@@ -10,4 +10,5 @@ public interface ProductServiceInt {
     void delProduct(int id);
     AmountResponse getAmount(int id);
     AmountResponse addAmount(int id,ProductRequest amountReq);
+    void save(Product product);
 }

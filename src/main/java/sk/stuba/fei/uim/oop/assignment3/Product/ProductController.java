@@ -18,6 +18,7 @@ public class ProductController {
     public List<ProductResponse> getProducts(){
         return this.service.getProducts().stream().map(ProductResponse::new).collect(Collectors.toList());
     }
+
     @PostMapping("/product")
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest prod){
         return new ResponseEntity<>(new ProductResponse(this.service.addProduct(prod)), HttpStatus.CREATED);

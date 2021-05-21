@@ -6,7 +6,7 @@ import sk.stuba.fei.uim.oop.assignment3.Exceptions.AlreadyPayedException;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.AmountLimitException;
 import sk.stuba.fei.uim.oop.assignment3.Exceptions.NotFoundException;
 import sk.stuba.fei.uim.oop.assignment3.Product.*;
-import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductCartRepo;
+import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductCartRepository;
 import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductInCart;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class CartService implements CartServiceInt {
 
     private CartRepository cartRepo;
     @Autowired
-    private ProductCartRepo InCartRepo;
+    private ProductCartRepository InCartRepo;
     @Autowired
     private ProductService productService;
 
@@ -26,8 +26,10 @@ public class CartService implements CartServiceInt {
     }
 
     @Override
-    public Cart createCart() {
-        return cartRepo.save(new Cart());
+    public CartResponse createCart() {
+        CartResponse createdResponse=new CartResponse();
+        createdResponse.setId(cartRepo.save(new Cart()).getId());
+        return createdResponse;
     }
 
     @Override

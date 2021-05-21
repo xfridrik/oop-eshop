@@ -36,6 +36,7 @@ public class ProductService implements ProductServiceInt{
         if (updateReq.getDescription()!=null){
             updateProduct.setDescription(updateReq.getDescription());
         }
+        rep.save(updateProduct);
         return updateProduct;
     }
 
@@ -55,9 +56,11 @@ public class ProductService implements ProductServiceInt{
     public AmountResponse addAmount(int id,ProductRequest amountReq) {
         Product amProduct=getProduct(id);
         amProduct.setAmount(amProduct.getAmount()+ amountReq.getAmount());
+        rep.save(amProduct);
         return new AmountResponse(amProduct.getAmount());
     }
 
+    @Override
     public void save(Product product){
         this.rep.save(product);
     }
