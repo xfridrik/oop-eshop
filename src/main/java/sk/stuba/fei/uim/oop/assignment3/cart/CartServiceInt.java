@@ -1,7 +1,7 @@
-package sk.stuba.fei.uim.oop.assignment3.Cart;
+package sk.stuba.fei.uim.oop.assignment3.cart;
 
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.AlreadyPayedException;
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.AmountLimitException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.AlreadyPayedException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.AmountLimitException;
 
 public interface CartServiceInt {
     CartResponse createCart();

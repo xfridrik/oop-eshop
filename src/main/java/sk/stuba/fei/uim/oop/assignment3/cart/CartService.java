@@ -1,11 +1,11 @@
-package sk.stuba.fei.uim.oop.assignment3.Cart;
+package sk.stuba.fei.uim.oop.assignment3.cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.AlreadyPayedException;
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.AmountLimitException;
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.NotFoundException;
-import sk.stuba.fei.uim.oop.assignment3.Product.*;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.AlreadyPayedException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.AmountLimitException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
+import sk.stuba.fei.uim.oop.assignment3.product.*;
 import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductCartRepository;
 import sk.stuba.fei.uim.oop.assignment3.productInCart.ProductInCart;
 

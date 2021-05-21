@@ -1,8 +1,8 @@
-package sk.stuba.fei.uim.oop.assignment3.Product;
+package sk.stuba.fei.uim.oop.assignment3.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.stuba.fei.uim.oop.assignment3.Exceptions.NotFoundException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 
 import java.util.List;
 

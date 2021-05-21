@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.Product;
+package sk.stuba.fei.uim.oop.assignment3.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

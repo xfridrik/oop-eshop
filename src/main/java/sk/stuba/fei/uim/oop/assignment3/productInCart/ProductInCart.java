@@ -2,8 +2,8 @@ package sk.stuba.fei.uim.oop.assignment3.productInCart;
 
 import lombok.Getter;
 import lombok.Setter;
-import sk.stuba.fei.uim.oop.assignment3.Cart.Cart;
-import sk.stuba.fei.uim.oop.assignment3.Product.Product;
+import sk.stuba.fei.uim.oop.assignment3.cart.Cart;
+import sk.stuba.fei.uim.oop.assignment3.product.Product;
 
 import javax.persistence.*;
 
